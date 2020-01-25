@@ -1,0 +1,8 @@
+/lib/
+/node_modules/
+/dist/
+/mochawesome-report/
+/public/static/
+yarn.lock
+yarn-error.log
+package-lock.json
