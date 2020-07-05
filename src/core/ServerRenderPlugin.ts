@@ -76,7 +76,7 @@ export class ServerRenderPlugin extends Common {
      * @param props [object] 传递到自定义组件的属性
      */
     beforeInitComponent(ComponentFactory: Component,nodeData:IVirtualElement, props: any): void {
-        const reduxParam = (<any>ComponentFactory).prototype.reduxParams;
+        const reduxParam = (<any>ComponentFactory).prototype.connect;
         if(reduxParam && (reduxParam.mapStateToProps || reduxParam.mapDispatchToProps)) {
             // 在初始化Component的时候在做connect操作，防止没有使用的组件但是定义了connect,在declareComponent的时候增加不必要的redux watch
             connect((<any>ComponentFactory),reduxParam.mapStateToProps, reduxParam.mapDispatchToProps, getGlobalState, defineGlobalState);
@@ -96,7 +96,7 @@ export class ServerRenderPlugin extends Common {
      */
     initComponent(ComponentFactory: Component, component:any, nodeData:IVirtualElement): void {
         // 初始化Redux
-        const reduxParam = (<any>ComponentFactory).prototype.reduxParams;
+        const reduxParam = (<any>ComponentFactory).prototype.connect;
         this.i18nController.initI18nTranslate(component);
         if(reduxParam && (reduxParam.mapStateToProps || reduxParam.mapDispatchToProps)) {
            this.reduxController.checkInitComponents(component, (<any>ComponentFactory).prototype.selector, nodeData);
